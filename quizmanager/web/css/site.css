@@ -82,3 +82,38 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.title-block {
+
+display: flex;
+    justify-content: space-between;
+
+
+}
+.page-title {
+    display: flex;
+}
+
+.buttons-block {
+    align-items: center;
+
+
+}
+
+.quiz-library-card{
+    background-color: #999999;
+    margin: 10px;
+}
+
+.question-block {
+    max-width: 30%;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+    border-right: 0rem;
+    margin-top: 20px;
+}

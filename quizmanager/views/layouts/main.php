@@ -27,6 +27,10 @@ AppAsset::register($this);
 
 <header>
     <?php
+//
+//    echo "<pre>";
+//    var_dump(Yii::$app->user->identity->attributes);
+//    echo "</pre>";
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -38,6 +42,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Quiz Library', 'url' => ['/quiz/index']],
+            ['label' => 'question Library', 'url' => ['/question/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Register', 'url' => ['/user/register']],
