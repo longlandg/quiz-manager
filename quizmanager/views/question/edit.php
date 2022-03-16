@@ -7,12 +7,10 @@ use yii\helpers\ArrayHelper;
 ?>
     <div class="background-card form-width">
     <div class="title-block">
-        <h1 class="page-title">Create Question</h1>
+    <h1 class="page-title">Edit Question</h1>
     </div>
-    <hr>
-    <div>
-
-
+        <hr>
+        <div>
 
 <?php $form = ActiveForm::begin(); ?>
 
@@ -36,13 +34,13 @@ use yii\helpers\ArrayHelper;
 
 )?>
 
-    <hr>
+
+<hr>
 
     <div>
-        <?=Html::submitButton('Create', ['class' => 'btn btn-sm btn-green']) ?>
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-sm btn-green']) ?>
         <a href="/question" class="btn btn-sm btn-orange left-spacer">Cancel</a>
     </div>
-
-        <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </div>
     </div>

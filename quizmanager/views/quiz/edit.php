@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 ?>
     <div class="background-card form-width">
     <div class="title-block">
-        <h1 class="page-title">Create Quiz</h1>
+        <h1 class="page-title">Edit Quiz Title</h1>
     </div>
     <hr>
     <div>
@@ -15,17 +15,19 @@ use yii\helpers\ArrayHelper;
 <?php $form = ActiveForm::begin(); ?>
 
 
+
 <?= $form->field($quiz, 'title') ?>
 <?= $form->field($quiz, 'created_by')->hiddenInput(['value'=>Yii::$app->user->identity->attributes['id']])->label(false); ?>
 
 
 
-
-<hr>
+    <hr>
     <div>
-        <?= Html::submitButton('Create', ['class' => 'btn btn-sm btn-green']) ?>
+
+
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-sm btn-green']) ?>
         <a href="/quiz" class="btn btn-sm btn-orange left-spacer">Cancel</a>
     </div>
-<?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
     </div>
     </div>

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -38,23 +39,16 @@ class QuizController extends \yii\web\Controller
 
         $projectHelper = New ProjectHelper;
         $quizLibrary = $projectHelper->getQuizLibrary();
-
+        $userNames = $projectHelper->getUsernames();
+        $pagearray = $projectHelper->getPaginatedQuizLibrary();
 
         return $this->render('index', [
-            'quizLibrary' => $quizLibrary,
-
+            'pages' =>  $pagearray[1],
+            'quizLibrary' => $pagearray[0],
+            'userNames' => $userNames,
         ]);
     }
 
-    public function actionTest(){
-
-
-
-
-        return $this->render('test', [
-
-        ]);
-    }
 
     public function actionCreate(){
 
@@ -78,11 +72,54 @@ class QuizController extends \yii\web\Controller
 
     }
 
+    public function actionEdit($id){
+
+        $quiz = Quiz::find()
+        ->where(['id' => $id])
+        ->one();
+
+        if ($quiz->load(Yii::$app->request->post())) {
+            if ($quiz->validate()) {
+                $quiz->created_by = Yii::$app->user->identity->attributes['id'];
+
+                $quiz->save();
+                yii::$app->getSession()->setFlash('success', 'Quiz edited successfully');
+                return $this->redirect('index');
+            }
+        }
+
+        return $this->render('edit', [
+            'quiz' => $quiz,
+        ]);
+
+
+
+    }
+
+    public function actionDelete($id){
+
+        $quiz = Quiz::findOne($id);
+        try {
+            $quiz->delete();
+            yii::$app->getSession()->setFlash('success', 'Quiz successfully deleted');
+            return $this->redirect('index');
+        } catch (\Exception $e) {
+            yii::$app->getSession()->setFlash('error', 'Quiz unsuccessfully deleted');
+            return $this->redirect('index');
+        }
+
+
+    }
+
     public function actionDetails(){
 
 $quizId = $_GET['id'];
         $quizList = Quiz::getQuizAttributes($quizId);
         $questions = Quiz::getSortQuizQuestions($quizId);
+        $projectHelper = New ProjectHelper;
+        $quizTitle = $projectHelper->getQuizTitle($quizId);
+
+
 //        $positionOfNextQuestion;
 if(count($questions) > 0) {
 
@@ -95,7 +132,8 @@ if(count($questions) > 0) {
             'quizList' => $quizList,
             'quizId' => $quizId,
             'questions' => $questions,
-            'positionOfNextQuestion' => $positionOfNextQuestion
+            'positionOfNextQuestion' => $positionOfNextQuestion,
+        'quizTitle' => $quizTitle
         ]);
     }
 
@@ -103,6 +141,10 @@ if(count($questions) > 0) {
         $quizId = $_GET['id'];
         $lastPosition = $_GET['position'];
         $nextPosition = $lastPosition + 1;
+        $projectHelper = New ProjectHelper;
+        $availableQuestions = $projectHelper->getAvailableQuestionsForAQuiz($quizId);
+        $usedQuestionIdsForQuiz = $projectHelper->getUsedQuestionIdsForQuiz($quizId);
+        $allQuestions = $projectHelper->getAllQuestions();
 
         $addQuestion = new QuizQuestion();
 
@@ -125,10 +167,31 @@ if(count($questions) > 0) {
 
         return $this->render('addquestion', [
             'addQuestion' => $addQuestion,
+            'availableQuestions' => $availableQuestions,
 //            'quizList' => $quizList,
             'quizId' => $quizId,
-            'nextPosition' => $nextPosition
+            'nextPosition' => $nextPosition,
 //            'questions' => $questions
+        'usedQuestionIdsForQuiz' => $usedQuestionIdsForQuiz,
+            'allQuestions' => $allQuestions
         ]);
     }
+
+    public function actionDeletequestion($questionId,$quizId){
+        $quiz = QuizQuestion::find()
+            ->andwhere(['question_id' => $questionId])
+            ->andWhere(['quiz_id' => $quizId])
+            ->one();
+        try {
+            $quiz->delete();
+            yii::$app->getSession()->setFlash('success', 'Question successfully deleted');
+            return $this->redirect(['quiz/details', 'id' => $quizId]);
+        } catch (\Exception $e) {
+            yii::$app->getSession()->setFlash('error', 'Question unsuccessfully deleted');
+            return $this->redirect(['quiz/details', 'id' => $quizId]);
+        }
+
+
+    }
+
 }

@@ -3,6 +3,10 @@
 /** @var yii\web\View $this */
 
 $this->title = 'My Yii Application';
+echo "<pre>";
+var_dump(Yii::$app->user->identity->attributes['level']);
+var_dump(Yii::$app->user->identity->attributes['status']);
+echo "</pre>";
 //var_dump(Yii::$app->user->isGuest);
 //echo "<pre>";
 //var_dump(Yii::$app->user->identity->attributes);

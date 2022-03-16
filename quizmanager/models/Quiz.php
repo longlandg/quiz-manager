@@ -36,15 +36,15 @@ class Quiz extends ActiveRecord
 //        ];
 //    }
 
-    public static function getQuizLibrary(){
-        $activeRecord = Quiz::find()
-            ->all();
-        $quizLibrary = [];
-        foreach ($activeRecord as $record){
-            array_push($quizLibrary, $record["attributes"]);
-        }
-        return $quizLibrary;
-    }
+//    public static function getQuizLibrary(){
+//        $activeRecord = Quiz::find()
+//            ->all();
+//        $quizLibrary = [];
+//        foreach ($activeRecord as $record){
+//            array_push($quizLibrary, $record["attributes"]);
+//        }
+//        return $quizLibrary;
+//    }
 
     public static function getQuizAttributes($id){
         $activeRecord = Quiz::find()

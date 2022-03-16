@@ -32,35 +32,53 @@ AppAsset::register($this);
 //    var_dump(Yii::$app->user->identity->attributes);
 //    echo "</pre>";
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Quiz Manager',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
+    $itemsArray;
+if(Yii::$app->user->isGuest){
+    $itemsArray = [];
+//    $itemsArray = [['label' => 'Home', 'url' => ['/site/index']]];
+} else {$itemsArray = [
+    ['label' => 'Home', 'url' => ['/site/index']],
+    ['label' => 'Quiz Library', 'url' => ['/quiz/index']],
+    ['label' => 'Question Library', 'url' => ['/question/index']],
+
+
+    ['label' => 'Register', 'url' => ['/user/register']],
+
+];}
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Quiz Library', 'url' => ['/quiz/index']],
-            ['label' => 'question Library', 'url' => ['/question/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Register', 'url' => ['/user/register']],
-            Yii::$app->user->isGuest ? (
+        'items' =>
+
+            $itemsArray
+    ]);
+
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' =>
+
+            [
+
+                Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
 
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+                ) : (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
                 )
-                . Html::endForm()
-                . '</li>'
-            )
-        ]
+            ]
     ]);
     NavBar::end();
     ?>
@@ -78,7 +96,7 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="float-left">&copy; WebbiSkools Ltd <?= date('Y') ?></p>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
