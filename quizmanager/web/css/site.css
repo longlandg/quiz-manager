@@ -114,6 +114,12 @@ display: flex;
     margin-bottom: 5px;
 }
 
+.red-text {
+
+    color: #ff3224;
+    margin-bottom: 5px;
+}
+
 .buttons-block {
     float: end;
     align-items: center;
@@ -253,6 +259,13 @@ margin-top:15px;
 .pagination .a {
     color: #5a6268;
     font-weight: bolder;
+
+}
+
+.quiz-back-button {
+display: flex;
+    justify-content: center;
+    margin-top: 15px;
 
 }
 

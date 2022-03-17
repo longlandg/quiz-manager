@@ -10,6 +10,20 @@ use yii\base\Security;
 
 class User extends ActiveRecord implements IdentityInterface
 {
+
+    const LEVEL_SUPER_ADMIN = 1;
+    const LEVEL_ADMIN = 2;
+    const LEVEL_STANDARD = 3;
+    const LEVEL_BASIC = 4;
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_RETIRED = 2;
+
+
+
+
+
+
     public static function tableName()
     {
         return 'user';
@@ -20,6 +34,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
 
             [['username', 'password', 'level', 'status'], 'required'],
+            ['username', 'unique']
 
         ];
     }

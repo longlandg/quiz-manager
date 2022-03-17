@@ -15,6 +15,9 @@ use yii\helpers\ArrayHelper;
     <div>
 
 
+<?php if(count($availableQuestions) == 0 ) { ?>
+                    <hp class="normal-text">There are currently no Questions in this category please go to Question Library and add a new question </hp>
+            <?php  } else { ?>
 
 <?php $form = ActiveForm::begin(); ?>
 <?php
@@ -42,4 +45,6 @@ use yii\helpers\ArrayHelper;
         <?= Html::submitButton('Add', ['class' => 'btn btn-sm btn-green']) ?>
         <a href="/quiz/details?id=<?=$quizId?>" class="btn btn-sm btn-orange left-spacer">Cancel</a>
     </div>
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end();
+}
+?>

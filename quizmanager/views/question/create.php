@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Question;
@@ -19,6 +18,9 @@ use yii\helpers\ArrayHelper;
 
 
 <?= $form->field($question, 'question')->textarea(['rows' => '3']) ?>
+
+        <?= $form->field($question, 'category_id')->dropDownList(
+            ArrayHelper::map($categoryArray, 'id', 'title'),['prompt' => 'select category']); ?>
 <?= $form->field($question, 'created_by')->hiddenInput(['value'=>Yii::$app->user->identity->attributes['id']])->label(false); ?>
 <?= $form->field($question, 'a')->label('Answer A') ?>
 <?= $form->field($question, 'b')->label('Answer B') ?>
@@ -34,7 +36,7 @@ use yii\helpers\ArrayHelper;
 
 
 
-)?>
+)->label('Correct Answer') ?>
 
     <hr>
 

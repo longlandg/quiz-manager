@@ -20,21 +20,20 @@ class Question extends ActiveRecord
     public function rules()
     {
         return [
-            [['question','a','b','c','d','answer','created_by'], 'required'],
+            [['question','category_id','a','b','c','d','answer','created_by'], 'required'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-//    public function attributeLabels()
-//    {
-//        return [
-//            'id' => 'id',
-//            'name' => 'Name',
-//            'fire' => 'Fire',
-//        ];
-//    }
+
+    public function attributeLabels()
+    {
+        return [
+            'question' => 'Question',
+            'category_id' => 'Category',
+            'created_by' => 'Created by',
+            'answer' => 'Correct Answer'
+        ];
+    }
 
     public static function getQuestionLibrary(){
         $activeRecord = Question::find()

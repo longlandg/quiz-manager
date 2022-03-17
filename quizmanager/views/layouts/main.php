@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use app\models\User;
 
 AppAsset::register($this);
 ?>
@@ -27,10 +28,7 @@ AppAsset::register($this);
 
 <header>
     <?php
-//
-//    echo "<pre>";
-//    var_dump(Yii::$app->user->identity->attributes);
-//    echo "</pre>";
+
     NavBar::begin([
         'brandLabel' => 'Quiz Manager',
         'brandUrl' => Yii::$app->homeUrl,
@@ -39,18 +37,25 @@ AppAsset::register($this);
         ],
     ]);
     $itemsArray;
-if(Yii::$app->user->isGuest){
-    $itemsArray = [];
-//    $itemsArray = [['label' => 'Home', 'url' => ['/site/index']]];
-} else {$itemsArray = [
-    ['label' => 'Home', 'url' => ['/site/index']],
-    ['label' => 'Quiz Library', 'url' => ['/quiz/index']],
-    ['label' => 'Question Library', 'url' => ['/question/index']],
-
-
-    ['label' => 'Register', 'url' => ['/user/register']],
-
-];}
+    if(Yii::$app->user->isGuest) {
+        $itemsArray = [];
+    } else if (!Yii::$app->user->isGuest && Yii::$app->user->identity->attributes['level'] == User::LEVEL_SUPER_ADMIN) {
+        $itemsArray = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Register', 'url' => ['/user/register']],
+                ];
+    } else if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->attributes['level'] == User::LEVEL_ADMIN || Yii::$app->user->identity->attributes['level'] == User::LEVEL_STANDARD)) {
+        $itemsArray = [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Quiz Library', 'url' => ['/quiz/index']],
+                ['label' => 'Question Library', 'url' => ['/question/index']],
+                ];
+    }else if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->attributes['level'] == User::LEVEL_ADMIN || Yii::$app->user->identity->attributes['level'] == User::LEVEL_BASIC)) {
+        $itemsArray = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Quiz Library', 'url' => ['/quiz/index']],
+        ];
+    };
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' =>

@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Question;
@@ -16,6 +15,8 @@ use yii\helpers\ArrayHelper;
 
 
 <?= $form->field($quiz, 'title') ?>
+        <?= $form->field($quiz, 'category_id')->dropDownList(
+            ArrayHelper::map($categoryArray, 'id', 'title'),['prompt' => 'select category']); ?>
 <?= $form->field($quiz, 'created_by')->hiddenInput(['value'=>Yii::$app->user->identity->attributes['id']])->label(false); ?>
 
 
