@@ -3,7 +3,6 @@ use yii\widgets\LinkPager;
 use app\models\User;
 use app\models\Category;
 
-
 ?>
 
 

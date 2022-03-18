@@ -59,16 +59,16 @@ class ProjectHelper extends ActiveRecord
         return $usedQuestionsIdArray;
     }
 
-    public function getAllQuestions(){
-        $allquestions = Question::find()
-            ->all();
-        $allQuestionsArray = [];
-        foreach($allquestions as $question){
-            $questionAttributes = $question->getAttributes($question->fields());
-            array_push($allQuestionsArray, $questionAttributes);
-        }
-        return $allQuestionsArray;
-    }
+//    public function getAllQuestions(){
+//        $allquestions = Question::find()
+//            ->all();
+//        $allQuestionsArray = [];
+//        foreach($allquestions as $question){
+//            $questionAttributes = $question->getAttributes($question->fields());
+//            array_push($allQuestionsArray, $questionAttributes);
+//        }
+//        return $allQuestionsArray;
+//    }
 
     public function getAllQuestionsByCategory($id){
         $allquestions = Question::find()
@@ -246,7 +246,13 @@ class ProjectHelper extends ActiveRecord
             ->select(['title'])
             ->where(['id' => $id])
             ->one();
-        return $activeRecord->attributes['title'];
+
+        if(!isset($activeRecord->attributes['title'])){
+            $title = 'no category on this id';
+        } else {
+            $title = $activeRecord->attributes['title'];
+        }
+        return $title;
     }
 }
 

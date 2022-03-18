@@ -52,18 +52,14 @@ class QuizController extends Controller
             $pagearray = $projectHelper->getPaginatedQuizLibraryByCategory($categoryId);
         } else{
 
-
-
             $pagearray = $projectHelper->getPaginatedQuizLibrary();
     }
-
-
 
         return $this->render('index', [
             'pages' =>  $pagearray[1],
             'quizLibrary' => $pagearray[0],
             'userNames' => $userNames,
-            'categoryTitles' => $categoryTitles
+            'categoryTitles' => $categoryTitles,
             ]);
     }
 
