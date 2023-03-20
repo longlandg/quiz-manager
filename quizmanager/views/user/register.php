@@ -13,10 +13,10 @@ use yii\helpers\ArrayHelper;
     </div>
     <hr>
     <div>
-
         <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($user, 'username'); ?>
+
         <?= $form->field($user, 'password')->passwordInput(); ?>
 
         <?= $form->field($user, 'level')->dropDownList(
@@ -29,6 +29,5 @@ use yii\helpers\ArrayHelper;
             <?= Html::submitButton('Register', ['class' => 'btn btn-sm btn-green']) ?>
         </div>
         <?php ActiveForm::end(); ?>
-
     </div>
 </div>

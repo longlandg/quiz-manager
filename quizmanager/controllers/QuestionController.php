@@ -5,13 +5,10 @@ namespace app\controllers;
 use app\components\ProjectHelper;
 use Yii;
 use yii\filters\AccessControl;
-
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use yii\data\pagination;
 use app\models\Question;
-use yii\widgets\LinkPager;
+use app\models\User;
+
 
 
 class QuestionController extends Controller
@@ -22,12 +19,22 @@ class QuestionController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'edit', 'delete', 'details', 'delete'],
+                'only' => ['index', 'create', 'edit', 'delete', 'details', 'delete'],
                 'rules' => [
                     [
-                        'actions' => ['create', 'edit', 'delete', 'details', 'delete'],
+                        'actions' => ['index', 'details'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create', 'edit', 'delete',],
+                        'matchCallback' => function ($rule, $action) {
+                            if(Yii::$app->user->identity->attributes['level'] < User::LEVEL_STANDARD){
+                                return true;
+                            }
+                            return false;
+                        }
                     ],
                 ],
             ]

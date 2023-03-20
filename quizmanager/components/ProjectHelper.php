@@ -12,31 +12,6 @@ use yii\db\ActiveRecord;
 
 class ProjectHelper extends ActiveRecord
 {
-//    public function getQuizLibrary(){
-//        $activeRecord = Quiz::find()
-//            ->orderBy(['id' => SORT_DESC])
-//            ->all();
-//        $quizLibrary = [];
-//        foreach ($activeRecord as $record){
-//            $recordAttributes = $record->getAttributes($record->fields());
-//            array_push($quizLibrary, $recordAttributes);
-//        }
-//        return $quizLibrary;
-//    }
-
-//    public function getQuizLibraryByTopic($id){
-//        $activeRecord = Quiz::find()
-//            ->where(['category_id' => $id])
-//            ->orderBy(['id' => SORT_DESC])
-//            ->all();
-//        $quizLibrary = [];
-//        foreach ($activeRecord as $record){
-//            $recordAttributes = $record->getAttributes($record->fields());
-//            array_push($quizLibrary, $recordAttributes);
-//        }
-//        return $quizLibrary;
-//    }
-
     public function getUsernames(){
         $users = user::find()
             ->all();
@@ -59,17 +34,6 @@ class ProjectHelper extends ActiveRecord
         return $usedQuestionsIdArray;
     }
 
-//    public function getAllQuestions(){
-//        $allquestions = Question::find()
-//            ->all();
-//        $allQuestionsArray = [];
-//        foreach($allquestions as $question){
-//            $questionAttributes = $question->getAttributes($question->fields());
-//            array_push($allQuestionsArray, $questionAttributes);
-//        }
-//        return $allQuestionsArray;
-//    }
-
     public function getAllQuestionsByCategory($id){
         $allquestions = Question::find()
             ->where(['category_id' => $id])
@@ -82,26 +46,6 @@ class ProjectHelper extends ActiveRecord
         return $allQuestionsArray;
     }
 
-//        public function getAvailableQuestionsForAQuiz($quizId){
-//        $allQuestionsArray = self::getAllQuestions();
-//            $allUsedQuestionsId = self::getUsedQuestionIdsForQuiz($quizId);
-//
-//
-//$newArray = [];
-//
-//    foreach($allQuestionsArray as $question){
-//        if(!in_array($question['id'], $allUsedQuestionsId)){
-//            array_push($newArray,$question);
-//        }
-//    }
-//
-//
-//return $newArray;
-//
-//
-//
-//
-//        }
 
     public function getAvailableQuestionsForAQuizByCategory($quizId,$categoryId){
         $allQuestionsArray = self::getAllQuestionsByCategory($categoryId);

@@ -14,9 +14,6 @@ class Question extends ActiveRecord
         return 'question';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [

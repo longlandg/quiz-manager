@@ -3,15 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use yii\data\pagination;
 use app\components\ProjectHelper;
 use app\models\Quiz;
 use app\models\QuizQuestion;
+use app\models\User;
 
 
 
@@ -23,12 +20,22 @@ class QuizController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'edit', 'delete', 'details', 'addquestion'],
+                'only' => ['index','details','create', 'edit', 'delete','addquestion'],
                 'rules' => [
                     [
-                        'actions' => ['create', 'edit', 'delete', 'details', 'addquestion'],
+                        'actions' => ['index', 'details'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create', 'edit', 'delete','addquestion'],
+                        'matchCallback' => function ($rule, $action) {
+                            if(Yii::$app->user->identity->attributes['level'] < User::LEVEL_STANDARD){
+                                return true;
+                            }
+                            return false;
+                        }
                     ],
                 ],
             ]

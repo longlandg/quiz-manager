@@ -36,38 +36,4 @@ class Quiz extends ActiveRecord
         ];
     }
 
-//    public static function getQuizLibrary(){
-//        $activeRecord = Quiz::find()
-//            ->all();
-//        $quizLibrary = [];
-//        foreach ($activeRecord as $record){
-//            array_push($quizLibrary, $record["attributes"]);
-//        }
-//        return $quizLibrary;
-//    }
-
-//    public static function getQuizAttributes($id){
-//        $activeRecord = Quiz::find()
-//            ->where(['id' => $id])
-//            ->one();
-//        $quizContents = $activeRecord->attributes;
-//
-//        return $quizContents;
-//    }
-
-//    public static function getSortQuizQuestions($id)
-//    {
-//        $activeRecord = QuizQuestion::find()
-//            ->where(['quiz_id' => $id])
-//            ->orderBy(['position' => SORT_ASC])
-//            ->all();
-//        $quizQuestionsAttributes = [];
-//        foreach ($activeRecord as $record){
-//            $question = Question::getQuestion($record['question_id']);
-//            $question['position'] = $record['position'];
-//            array_push($quizQuestionsAttributes, $question);
-//        }
-//
-//        return $quizQuestionsAttributes;
-//    }
 }

@@ -19,11 +19,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 1;
     const STATUS_RETIRED = 2;
 
-
-
-
-
-
     public static function tableName()
     {
         return 'user';

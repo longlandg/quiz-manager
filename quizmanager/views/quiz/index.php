@@ -10,9 +10,8 @@ use app\models\Category;
     <div class="title-block">
         <h1 class="page-title">Quiz Library</h1>
         <?php if (Yii::$app->user->identity->attributes['level'] == User::LEVEL_ADMIN) { ?>
-        <div class="buttons-block"> <a href="/quiz/create" class="btn btn-md btn-green">Create Quiz</a></div>
+            <div class="buttons-block"> <a href="/quiz/create" class="btn btn-md btn-green">Create Quiz</a></div>
         <?php } ?>
-
     </div>
     <br>
     <a href="/quiz/index" class="btn btn-sm btn-orange left-spacer">All</a>
@@ -50,8 +49,7 @@ use app\models\Category;
                             <a href="/quiz/details?id=<?= $quiz['id'] ?>" class="btn btn-sm btn-green left-spacer">View</a>
                         </div>
                     </div>
-                <?php }
-            };?>
+                <?php }};?>
             <div class="page-selector">
                 <?php
                 echo LinkPager::widget([

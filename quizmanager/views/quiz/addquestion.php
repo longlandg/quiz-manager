@@ -16,7 +16,7 @@ use yii\helpers\ArrayHelper;
 
 
 <?php if(count($availableQuestions) == 0 ) { ?>
-                    <hp class="normal-text">There are currently no Questions in this category please go to Question Library and add a new question </hp>
+                    <h3 class="normal-text">There are currently no Questions in this category please go to Question Library and add a new question </h3>
             <?php  } else { ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -24,11 +24,6 @@ use yii\helpers\ArrayHelper;
 
 ?>
 <?= $form->field($addQuestion, 'question_id')->dropDownList(
-//    Question::find()
-//        ->select(['question', 'id'])
-//        ->where(['not in', 'id',$questionsAlreadyInQuiz])
-//        ->indexBy('id')
-//        ->column(),['prompt' => 'select question']
     ArrayHelper::map($availableQuestions, 'id', 'question'),['prompt' => 'select question']
 
 )->label(false) ?>
@@ -46,5 +41,4 @@ use yii\helpers\ArrayHelper;
         <a href="/quiz/details?id=<?=$quizId?>" class="btn btn-sm btn-orange left-spacer">Cancel</a>
     </div>
 <?php ActiveForm::end();
-}
-?>
+}?>

@@ -1,19 +1,16 @@
 
 <?php
-//$this->title = $quiz->title
+
 use yii\widgets\LinkPager;
-//var_dump($models);
 use app\models\User;
 use app\models\Category;
-
 ?>
-
 
 <div class="background-card">
     <div class="title-block">
         <h1 class="page-title">Question Library</h1>
         <?php if (Yii::$app->user->identity->attributes['level'] == User::LEVEL_ADMIN) { ?>
-        <div class="buttons-block"><a href="/question/create" class="btn btn-md btn-green">Create Question</a></div>
+            <div class="buttons-block"><a href="/question/create" class="btn btn-md btn-green">Create Question</a></div>
         <?php } ?>
     </div>
     <br>
@@ -23,7 +20,6 @@ use app\models\Category;
     <a href="/question/index?category=<?=Category::CATEGORY_ENGLISH?>" class="btn btn-sm btn-orange left-spacer">English</a>
     <a href="/question/index?category=<?=Category::CATEGORY_HISTORY?>" class="btn btn-sm btn-orange left-spacer">History</a>
     <a href="/question/index?category=<?=Category::CATEGORY_GEOGRAPHY?>" class="btn btn-sm btn-orange left-spacer">Geography</a>
-
     <hr>
     <div>
         <?php if (Yii::$app->user->identity->attributes['level'] == User::LEVEL_SUPER_ADMIN || Yii::$app->user->identity->attributes['level'] == User::LEVEL_BASIC) { ?>
@@ -67,6 +63,7 @@ use app\models\Category;
                                     <?php } else { ?>
                                         <p class="normal-text"><strong>D: </strong><?= $question['d'] ?> </p>
                                     <?php } ?>
+
                                 <?php } ?>
                             </div>
                         </div>
@@ -87,9 +84,9 @@ use app\models\Category;
                             </div>
                         </div>
                     </div>
-                <?php
+                    <?php
                 }
-            ;?>
+                ;?>
                 <div class="page-selector">
                     <?php
                     echo LinkPager::widget([
